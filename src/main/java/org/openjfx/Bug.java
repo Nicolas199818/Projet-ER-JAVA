@@ -7,31 +7,36 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Bug {
-    private SimpleIntegerProperty idBug;
+    private SimpleStringProperty idBug;
     private SimpleStringProperty date;
     private SimpleStringProperty contenu;
     private SimpleStringProperty type;
     private SimpleStringProperty status;
-    private SimpleIntegerProperty user;
+    private SimpleStringProperty user;
 
-    public Bug(int idBug, String date, String contenu, String type, String status, int user) {
-        this.idBug = new SimpleIntegerProperty(idBug);
+    public Bug(String idBug, String date, String contenu, String type, int status, String user) {
+        this.idBug = new SimpleStringProperty(idBug);
         this.date = new SimpleStringProperty(date);
         this.contenu = new SimpleStringProperty(contenu);
         this.type = new SimpleStringProperty(type);
-        this.status = new SimpleStringProperty(status);
-        this.user = new SimpleIntegerProperty(user);
+        if(status == 0){
+            this.status = new SimpleStringProperty("Bug en cours de traitement");
+        }
+        else {
+            this.status = new SimpleStringProperty("Bug traité");
+        }
+        this.user = new SimpleStringProperty(user);
     }
 
-    public int getIdBug() {
+    public String getIdBug() {
         return idBug.get();
     }
 
-    public SimpleIntegerProperty idBugProperty() {
+    public SimpleStringProperty idBugProperty() {
         return idBug;
     }
 
-    public void setIdBug(int idBug) {
+    public void setIdBug(String idBug) {
         this.idBug.set(idBug);
     }
 
@@ -83,15 +88,15 @@ public class Bug {
         this.status.set(status);
     }
 
-    public int getUser() {
+    public String getUser() {
         return user.get();
     }
 
-    public SimpleIntegerProperty userProperty() {
+    public SimpleStringProperty userProperty() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(String user) {
         this.user.set(user);
     }
 }
