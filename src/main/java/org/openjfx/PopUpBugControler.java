@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -27,12 +28,7 @@ public class PopUpBugControler implements Initializable {
     @FXML
     private Label label_id_user;
 
-    private String id;
-    private String date_creation;
-    private String content;
-    private String type;
-    private String status;
-    private String id_user;
+    private TableView<Bug> table;
 
 
     //On référence les différents labels que l'on voudra modifier.
@@ -41,24 +37,8 @@ public class PopUpBugControler implements Initializable {
 
     }
 
-    public PopUpBugControler(String id, String date_creation, String content, String type, String status, String id_user) {
-        this.id = id;
-        this.date_creation = date_creation;
-        this.content = content;
-        this.type = type;
-        this.status = status;
-        this.id_user = id_user;
-        System.out.println("marche pas ----------- "+this.content);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.label_id.setText(id);
-        this.label_date_creation.setText(date_creation);
-        this.label_content.setText(content);
-        this.label_type.setText(type);
-        this.label_status.setText(status);
-        this.label_id_user.setText(id_user);
     }
 
     //On catch le click sur Annuler pour fermer la pop Up
@@ -76,6 +56,14 @@ public class PopUpBugControler implements Initializable {
     public void resoudre(ActionEvent event){
         //Etape 1 : Faire une méthode dans le Network qui permet de réaliser la résolution d'un bug.
         //Etape 2 : L'appelé ici.
+        NetworkService network = new NetworkService();
+        network.resolveBug(this.getLabel_id().getText(),1);
+        Node source = (Node) event.getSource();
+        Window theStage = source.getScene().getWindow();
+        Stage currentStage = (Stage)theStage.getScene().getWindow();
+        Bug selectedItem = table.getSelectionModel().getSelectedItem();
+        table.getItems().remove(selectedItem);
+        currentStage.close();
     }
     //On fait un constructeur du controller. Ce qui permet de passer les données.
 
@@ -102,5 +90,9 @@ public class PopUpBugControler implements Initializable {
 
     public Label getLabel_id_user() {
         return label_id_user;
+    }
+
+    public void setTable(TableView<Bug> tableView){
+        this.table = tableView;
     }
 }

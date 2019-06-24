@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane prefHeight="600.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.Statistics">
+
+    <left>
+        <VBox prefHeight="600.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png" />
+                    </image></ImageView>
+                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toBug" prefWidth="130.0" text="Bug" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin></Button>
+                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="130.0" text="Statistics" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </VBox.margin></Button>
+            </children>
+        </VBox>
+    </left>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" minWidth="0.0" prefWidth="1500.0" />
+          <ColumnConstraints hgrow="NEVER" minWidth="300.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefWidth="200.0" text="Nombre total de note de frais" />
+            <Label fx:id="nombreER" text="Label" GridPane.columnIndex="1" />
+            <Label text="Nombre total d'argent" GridPane.rowIndex="1" />
+            <Label fx:id="totalER" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Nombre total d'entreprise" GridPane.rowIndex="2" />
+            <Label fx:id="totalEntreprise" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Nombre total de bug" GridPane.rowIndex="3" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Les chiffres clés :" GridPane.rowIndex="4" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                   <StackPane prefHeight="150.0" prefWidth="200.0">
+                       <Circle fill="#f1f8ff" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                       <Label fx:id="totalERCircle" alignment="CENTER" text="Nombre total d'entreprise" textAlignment="CENTER" GridPane.rowIndex="2" />
+                   </StackPane>
+                   <StackPane prefHeight="150.0" prefWidth="200.0">
+                       <Circle fill="#f1f8ff" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                       <Label fx:id="totalArgentCircle" alignment="CENTER" text="Nombre total d'entreprise" textAlignment="CENTER" GridPane.rowIndex="2" />
+                   </StackPane>
+                   <StackPane prefHeight="150.0" prefWidth="200.0">
+                       <Circle fill="#f1f8ff" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                       <Label fx:id="totalCompanyCircle" alignment="CENTER" text="Nombre total d'entreprise" textAlignment="CENTER" GridPane.rowIndex="2" />
+                   </StackPane>
+                   <StackPane prefHeight="150.0" prefWidth="200.0">
+                       <Circle fill="#f1f8ff" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                       <Label fx:id="totalBugCircle" alignment="CENTER" text="Nombre total d'entreprise" textAlignment="CENTER" GridPane.rowIndex="2" />
+                   </StackPane>
+               </children>
+            </HBox>
+            <PieChart fx:id="pieChart" title="Les principaux clients" GridPane.rowIndex="6" />
+         </children>
+      </GridPane>
+   </center>
+
+</BorderPane>

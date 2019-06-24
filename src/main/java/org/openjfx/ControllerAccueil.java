@@ -2,16 +2,22 @@ package org.openjfx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,15 +39,8 @@ public class ControllerAccueil implements Initializable {
         TableColumn user = (TableColumn) myTable.getColumns().get(5);
 
         NetworkService networkService = new NetworkService();
-        networkService.getListBug(0);
         //On initialise une liste d'observable qui correspondent aux données que l'on veut rentrer dans la table
-        ObservableList<Bug> data = networkService.getListBug(0);
-        data.add(new Bug("0","12/02/2019","La map ne s'affiche pas bien, on me montre l'océan pacifique","Bug d'affichage",0,"1"));
-        data.add(new Bug("1","12/02/2019","La map ne s'affiche pas bien, on me montre l'océan pacifique","Bug d'affichage",0,"1"));
-        data.add(new Bug("2","12/02/2019","La map ne s'affiche pas bien, on me montre l'océan pacifique","Bug d'affichage",0,"1"));
-        data.add(new Bug("3","12/02/2019","La map ne s'affiche pas bien, on me montre l'océan pacifique","Bug d'affichage",0,"1"));
-        data.add(new Bug("4","12/02/2019","La map ne s'affiche pas bien, on me montre l'océan pacifique","Bug d'affichage",0,"1"));
-
+        ObservableList<Bug> data = networkService.getListBugByStatut(0);
 
 
         //On essaye d'associer les données avec les données avec les colonnes.
@@ -62,7 +61,7 @@ public class ControllerAccueil implements Initializable {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Bug rowData = row.getItem();
                     //C'est le moment où l'on décide ce que l'on veut faire.
-                    //System.out.println(rowData);
+                    System.out.println(rowData);
                     Stage stage = new Stage();
                     AnchorPane idPage = null;
                     try {
@@ -77,7 +76,7 @@ public class ControllerAccueil implements Initializable {
                         controler.getLabel_type().setText(rowData.getType());
                         controler.getLabel_status().setText(rowData.getStatus());
                         controler.getLabel_id_user().setText(rowData.getUser());
-
+                        controler.setTable(myTable);
 
 
                         //idPage = FXMLLoader.load(App.class.getResource("/pop_up_bug.fxml"));
@@ -93,5 +92,25 @@ public class ControllerAccueil implements Initializable {
             return row ;
         });
 
+    }
+
+
+    //On fait une fonction qui permet d'aller sur la page Statistics
+    @FXML
+    public void toStatistics(ActionEvent event){
+        BorderPane root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/statistics.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Node source = (Node) event.getSource();
+        Window theStage = source.getScene().getWindow();
+        Stage currentStage = (Stage)theStage.getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        currentStage.setX((primScreenBounds.getWidth() - currentStage.getWidth()) / 2);
+        currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
     }
 }
