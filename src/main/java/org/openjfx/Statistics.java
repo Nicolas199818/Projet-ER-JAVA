@@ -29,12 +29,6 @@ import java.util.ResourceBundle;
 public class Statistics implements Initializable {
     //On récupère les différents éléments avec FXML :
     @FXML
-    private Label nombreER;
-    @FXML
-    private Label totalER;
-    @FXML
-    private Label totalEntreprise;
-    @FXML
     private Label totalERCircle;
     @FXML
     private Label totalArgentCircle;
@@ -44,6 +38,10 @@ public class Statistics implements Initializable {
     private Label totalBugCircle;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private PieChart pieChartEr;
+    @FXML
+    private PieChart pieChartBug;
 
 
     @Override
@@ -59,9 +57,6 @@ public class Statistics implements Initializable {
         NetworkService network = new NetworkService();
         network.getListExpenseReport();
         System.out.println("Test de la taille de la liste : "+network.getListExpenseReport().size());
-        nombreER.setText(""+network.getListExpenseReport().size());
-        totalER.setText(""+getSommeERByList(network.getListExpenseReport()));
-        totalEntreprise.setText(""+network.getListCompany().size());
 
         totalERCircle.setText(""+network.getListExpenseReport().size()+"\n note de frais");
         totalArgentCircle.setText(""+getSommeERByList(network.getListExpenseReport())+"\n d'argent de note de frais");
@@ -71,7 +66,10 @@ public class Statistics implements Initializable {
         //On va Initialiser le graphique
         ObservableList<Company> dataCompany;
         //pieChart.setData();
+        pieChart.setLabelsVisible(false);
         pieChart.setData(getListCompanyPieChart());
+        pieChartEr.setLabelsVisible(false);
+        pieChartEr.setData(this.getListCompaniePieChartER());
 
 
 
@@ -105,7 +103,7 @@ public class Statistics implements Initializable {
         return somme;
     }
 
-    //On fait une fonction qui permet de renvoyer une observable avec les 5 plus grosse entreprises ainsi qu'une case "Autre".
+    //On fait une fonction qui permet de renvoyer une observable avec les 5 plus grosse entreprises ainsi qu'une case "Autre" en fonction de l'argent.
     public ObservableList<PieChart.Data> getListCompanyPieChart(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         NetworkService network = new NetworkService();
@@ -128,6 +126,31 @@ public class Statistics implements Initializable {
             //les affichers
             List<Company> listCompany = network.getListCompany();
 
+        }
+        return listData;
+    }
+
+    //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de notes de frais :
+    public ObservableList<PieChart.Data> getListCompaniePieChartER(){
+        ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
+        NetworkService network = new NetworkService();
+        for(Company company:network.getListCompany()){
+            if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
+                listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
+            }
+        }
+        return listData;
+    }
+
+
+    //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de bugs recensés. :
+    public ObservableList<PieChart.Data> getListCompaniePieChartBug(){
+        ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
+        NetworkService network = new NetworkService();
+        for(Company company:network.getListCompany()){
+            if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
+                listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
+            }
         }
         return listData;
     }

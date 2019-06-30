@@ -70,7 +70,7 @@
                <children>
                    <PieChart fx:id="pieChartEr" prefHeight="200.0" prefWidth="400.0" title="Le nombre de note de frais par entreprise" />
                    <PieChart fx:id="pieChart" prefHeight="200.0" prefWidth="400.0" title="L'argent dépensé par entreprise" />
-                  <PieChart fx:id="pieChartBug" prefHeight="200.0" prefWidth="400.0" title="Le nombre de User par entreprise" />
+                  <PieChart fx:id="pieChartBug" prefHeight="200.0" prefWidth="400.0" title="Le nombre de Bug signalé par entreprise" />
                </children>
                <GridPane.margin>
                   <Insets top="40.0" />
