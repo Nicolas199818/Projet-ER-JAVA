@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.openjfx.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,17 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.openjfx.data.Company;
+import org.openjfx.data.ExpenseReport;
+import org.openjfx.service.NetworkService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,7 +39,7 @@ public class Statistics implements Initializable {
     @FXML
     private PieChart pieChartEr;
     @FXML
-    private PieChart pieChartBug;
+    private PieChart pieChartUser;
 
 
     @Override
@@ -70,6 +68,9 @@ public class Statistics implements Initializable {
         pieChart.setData(getListCompanyPieChart());
         pieChartEr.setLabelsVisible(false);
         pieChartEr.setData(this.getListCompaniePieChartER());
+        pieChartUser.setData(this.getListCompaniePieChartUser());
+        pieChartUser.setLabelsVisible(false);
+
 
 
 
@@ -80,7 +81,7 @@ public class Statistics implements Initializable {
 
         BorderPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/bugs.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,10 +116,6 @@ public class Statistics implements Initializable {
                     listData.add(new PieChart.Data(company.getName()+" : "+getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany())),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
                 }
             }
-            for(Company company : listFiveCompany(network.getListCompany())){
-                System.out.println(company.getName());
-            }
-
         }
         else {
             //trier la liste des company en fonction de l'argent
@@ -136,32 +133,25 @@ public class Statistics implements Initializable {
         NetworkService network = new NetworkService();
         for(Company company:network.getListCompany()){
             if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
-                listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
+                listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),network.getListExpenseReportByCompany(company.getIdCompany()).size()));
             }
         }
         return listData;
     }
 
 
-    //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de bugs recensés. :
-    public ObservableList<PieChart.Data> getListCompaniePieChartBug(){
+    //A partir du java, on va envoyer l'id de la company. On recevra alors les différents utilisateurs :
+    public ObservableList<PieChart.Data> getListCompaniePieChartUser(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         NetworkService network = new NetworkService();
         for(Company company:network.getListCompany()){
-            if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
-                listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
+            if(network.getListUserByCompany(company.getIdCompany())!=null){
+                listData.add(new PieChart.Data(company.getName()+" : "+network.getListUserByCompany(company.getIdCompany()).size(),network.getListUserByCompany(company.getIdCompany()).size()));
             }
         }
         return listData;
     }
 
-    //Cette fonctino renvoit les 5 plus grandes valeurs
-    public List<Company> listFiveCompany(List<Company> listCompany){
-        NetworkService network = new NetworkService();
-        Collections.sort(listCompany,
-                (o1, o2) -> new Integer(getSommeERByList(network.getListExpenseReportByCompany(o1.getIdCompany()))).compareTo(new Integer(getSommeERByList(network.getListExpenseReportByCompany(o2.getIdCompany())))));
-        return listCompany;
-    }
 }
 
 //Comment est-ce que tu vas organiser les statistiques ?

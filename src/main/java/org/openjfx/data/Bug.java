@@ -1,10 +1,15 @@
-package org.openjfx;
+package org.openjfx.data;
 
 //On créer une classe qui définit le modèle de données et fournit les méthodes et les
 //champs en vue de travailler avec la table.
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Bug {
     private SimpleStringProperty idBug;
@@ -98,5 +103,23 @@ public class Bug {
 
     public void setUser(String user) {
         this.user.set(user);
+    }
+
+    public boolean isBefore(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        try {
+            Date userDate = dateFormat.parse(this.date.get());
+            System.out.println("La date du user : "+ dateFormat.parse(this.date.get()));
+            //System.out.println("autre format "+date);
+            if(userDate.compareTo(date)<=0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

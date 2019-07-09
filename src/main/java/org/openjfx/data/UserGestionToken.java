@@ -1,10 +1,10 @@
-package org.openjfx;
+package org.openjfx.data;
 
-public class User {
+public class UserGestionToken {
     private static String token = "";
 
     public static void setToken(String token){
-        User.token = token;
+        UserGestionToken.token = token;
     }
 
     public static String getToken(){

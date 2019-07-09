@@ -1,26 +1,23 @@
-package org.openjfx;
+package org.openjfx.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import org.openjfx.data.Bug;
+import org.openjfx.service.NetworkService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerAccueil implements Initializable {
@@ -28,31 +25,25 @@ public class ControllerAccueil implements Initializable {
     @FXML
     private TableView myTable;
 
+    private TableColumn idBug;
+    private TableColumn dateCreation;
+    private TableColumn contenu;
+    private TableColumn type;
+    private TableColumn status;
+    private TableColumn user;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //On va référencer les différentes colonnes pour ensuite les remplirs
-        javafx.scene.control.TableColumn idBug = (javafx.scene.control.TableColumn) myTable.getColumns().get(0);
-        TableColumn dateCreation = (TableColumn) myTable.getColumns().get(1);
-        TableColumn contenu = (TableColumn) myTable.getColumns().get(2);
-        TableColumn type = (TableColumn) myTable.getColumns().get(3);
-        TableColumn status = (TableColumn) myTable.getColumns().get(4);
-        TableColumn user = (TableColumn) myTable.getColumns().get(5);
-
+        this.initialiseColumn();
         NetworkService networkService = new NetworkService();
         //On initialise une liste d'observable qui correspondent aux données que l'on veut rentrer dans la table
-        ObservableList<Bug> data = networkService.getListBugByStatut(0);
+        List<Bug> data = networkService.getListBugByStatut(0);
+        this.associateColumnBugData();
 
-
-        //On essaye d'associer les données avec les données avec les colonnes.
-        idBug.setCellValueFactory(new PropertyValueFactory<Bug,String>("idBug"));
-        dateCreation.setCellValueFactory(new PropertyValueFactory<Bug,String>("date"));
-        contenu.setCellValueFactory(new PropertyValueFactory<Bug,String>("contenu"));
-        type.setCellValueFactory(new PropertyValueFactory<Bug,String>("type"));
-        status.setCellValueFactory(new PropertyValueFactory<Bug,String>("status"));
-        user.setCellValueFactory(new PropertyValueFactory<Bug,String>("user"));
 
         //On met les données dans le table :
-        myTable.setItems(data);
+        myTable.setItems(this.transformToObservable(data));
 
         // On rend le double clic possible. :
         myTable.setRowFactory( tv -> {
@@ -91,26 +82,35 @@ public class ControllerAccueil implements Initializable {
             });
             return row ;
         });
-
     }
 
+    //On fait une fonction pour initialiser les colonnes.
+    private void initialiseColumn(){
+        this.idBug = (javafx.scene.control.TableColumn) myTable.getColumns().get(0);
+        this.dateCreation = (TableColumn) myTable.getColumns().get(1);
+        this.contenu = (TableColumn) myTable.getColumns().get(2);
+        this.type = (TableColumn) myTable.getColumns().get(3);
+        this.status = (TableColumn) myTable.getColumns().get(4);
+        this.user = (TableColumn) myTable.getColumns().get(5);
+    }
 
-    //On fait une fonction qui permet d'aller sur la page Statistics
-    @FXML
-    public void toStatistics(ActionEvent event){
-        BorderPane root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/statistics.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Node source = (Node) event.getSource();
-        Window theStage = source.getScene().getWindow();
-        Stage currentStage = (Stage)theStage.getScene().getWindow();
-        currentStage.setScene(new Scene(root));
-        currentStage.show();
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        currentStage.setX((primScreenBounds.getWidth() - currentStage.getWidth()) / 2);
-        currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
+    //Associer les données des objets Bugs avec
+    private void associateColumnBugData(){
+        idBug.setCellValueFactory(new PropertyValueFactory<Bug,String>("idBug"));
+        dateCreation.setCellValueFactory(new PropertyValueFactory<Bug,String>("date"));
+        contenu.setCellValueFactory(new PropertyValueFactory<Bug,String>("contenu"));
+        type.setCellValueFactory(new PropertyValueFactory<Bug,String>("type"));
+        status.setCellValueFactory(new PropertyValueFactory<Bug,String>("status"));
+        user.setCellValueFactory(new PropertyValueFactory<Bug,String>("user"));
+    }
+
+    //On fait une fonction qui transforme une list en une observableList.
+    private ObservableList transformToObservable(List list){
+        return FXCollections.observableList(list);
+    }
+
+    //On fait une fonction qui à partir d'un bug ouvrir la popUp
+    public void openPopUpByBug(){
+        
     }
 }

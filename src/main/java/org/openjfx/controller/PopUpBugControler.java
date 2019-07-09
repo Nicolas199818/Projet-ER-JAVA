@@ -1,15 +1,15 @@
-package org.openjfx;
+package org.openjfx.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.openjfx.data.Bug;
+import org.openjfx.service.NetworkService;
 
 import java.net.URL;
 import java.util.ResourceBundle;

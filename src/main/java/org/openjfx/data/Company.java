@@ -1,4 +1,9 @@
-package org.openjfx;
+package org.openjfx.data;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Company{
     private String idCompany;
@@ -53,6 +58,25 @@ public class Company{
 
     public void setLastUpdateAt(String lastUpdateAt) {
         this.lastUpdateAt = lastUpdateAt;
+    }
+
+    //test si cet User a bien  une date inférieur à celle donnée.
+    public boolean isBefore(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        try {
+            Date userDate = dateFormat.parse(this.createdAt);
+            System.out.println("La date du user : "+ dateFormat.parse(this.createdAt));
+            //System.out.println("autre format "+date);
+            if(userDate.compareTo(date)<=0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

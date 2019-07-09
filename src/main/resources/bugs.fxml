@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="800.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.ControllerAccueil">
+<BorderPane prefHeight="800.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controller.ControllerAccueil">
    <center>
       <TableView fx:id="myTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
@@ -24,24 +24,6 @@
         </columns>
       </TableView>
    </center>
-   <left>
-      <VBox prefHeight="600.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@logo.png" />
-               </image></ImageView>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="130.0" text="Bug" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </VBox.margin></Button>
-             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toStatistics" prefWidth="130.0" text="Statistics" textAlignment="CENTER">
-                 <VBox.margin>
-                     <Insets left="10.0" top="10.0" />
-                 </VBox.margin></Button>
-         </children>
-      </VBox>
-   </left>
    <top>
       <Label text="La liste des bugs :" BorderPane.alignment="CENTER">
          <font>

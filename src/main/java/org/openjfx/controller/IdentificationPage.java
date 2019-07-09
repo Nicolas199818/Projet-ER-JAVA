@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.openjfx.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,34 +14,34 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.openjfx.service.NetworkService;
 
 import java.io.IOException;
 
-public class SignUpController {
-    //On récupère les éléments graphiques :
-    @FXML
-    private TextField lastname;
-    @FXML
-    private TextField firstname;
+
+public class IdentificationPage {
+
     @FXML
     private TextField login;
     @FXML
     private TextField password;
     @FXML
-    private Button seConnecter;
+    private Button connecter;
     @FXML
     private Label labelerror;
 
     @FXML
-    public void seConnecter(ActionEvent event){
+    public void test(ActionEvent event){
+        /*C'est ici que l'on mettra le code pour checker que ça marche avec la base*/
+
         BorderPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/main_pages.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         NetworkService network = new NetworkService();
-        if(network.signUpUser(lastname.getText(),firstname.getText(),login.getText(),password.getText())==200){
+        if(network.signInUser(login.getText(),password.getText())==200){
             Node source = (Node) event.getSource();
             Window theStage = source.getScene().getWindow();
             Stage currentStage = (Stage)theStage.getScene().getWindow();
@@ -60,13 +60,13 @@ public class SignUpController {
     }
 
     @FXML
-    public void toSignIn(ActionEvent event){
+    public void toSignUp(ActionEvent event){
         Node source = (Node) event.getSource();
         Window theStage = source.getScene().getWindow();
         Stage currentStage = (Stage)theStage.getScene().getWindow();
         AnchorPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/identification_page.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/sign_up.fxml"));
             currentStage.setScene(new Scene(root));
             currentStage.show();
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -76,7 +76,4 @@ public class SignUpController {
             e.printStackTrace();
         }
     }
-
-
-
 }
