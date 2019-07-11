@@ -47,7 +47,7 @@ public class Statistics implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         network.getListExpenseReport();
 
         totalERCircle.setText(""+network.getListExpenseReport().size()+"\n expense report");
@@ -128,7 +128,7 @@ public class Statistics implements Initializable {
     //On fait une fonction qui permet de renvoyer une observable avec les 5 plus grosse entreprises ainsi qu'une case "Autre" en fonction de l'argent.
     public ObservableList<PieChart.Data> getListCompanyPieChart(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         if(network.getListCompany().size()<5){
             //Pour toutes les companies que l'on a : On prend les companies et on prend la liste des notes de frais de cette companies en calculant le total
             for(Company company:network.getListCompany()){
@@ -160,7 +160,7 @@ public class Statistics implements Initializable {
     //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de notes de frais :
     public ObservableList<PieChart.Data> getListCompaniePieChartER(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         if(network.getListCompany().size()<5){
             for(Company company:network.getListCompany()){
                 if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
@@ -194,7 +194,7 @@ public class Statistics implements Initializable {
     //A partir du java, on va envoyer l'id de la company. On recevra alors les différents utilisateurs :
     public ObservableList<PieChart.Data> getListCompaniePieChartUser(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         if(network.getListCompany().size()<5){
             for(Company company:network.getListCompany()){
                 if(network.getListUserByCompany(company.getIdCompany())!=null){

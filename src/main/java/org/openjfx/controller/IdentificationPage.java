@@ -40,13 +40,18 @@ public class IdentificationPage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         if(network.signInUser(login.getText(),password.getText())==200){
             Node source = (Node) event.getSource();
             Window theStage = source.getScene().getWindow();
             Stage currentStage = (Stage)theStage.getScene().getWindow();
-            currentStage.setScene(new Scene(root));
-            currentStage.show();
+            currentStage.close();
+
+            Stage newStage = new Stage();
+            newStage.setMinWidth(1400);
+            newStage.setMinHeight(800);
+            newStage.setScene(new Scene(root));
+            newStage.show();
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             currentStage.setX((primScreenBounds.getWidth() - currentStage.getWidth()) / 2);
             currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);

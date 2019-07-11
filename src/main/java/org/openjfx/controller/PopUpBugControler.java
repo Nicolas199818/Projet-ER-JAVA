@@ -57,7 +57,7 @@ public class PopUpBugControler implements Initializable {
     public void resoudre(ActionEvent event){
         //Etape 1 : Faire une méthode dans le Network qui permet de réaliser la résolution d'un bug.
         //Etape 2 : L'appelé ici.
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         network.resolveBug(this.getLabel_id().getText(),1);
         Node source = (Node) event.getSource();
         Window theStage = source.getScene().getWindow();

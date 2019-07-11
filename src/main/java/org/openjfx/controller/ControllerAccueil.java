@@ -36,7 +36,7 @@ public class ControllerAccueil implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.initialiseColumn();
-        NetworkService networkService = new NetworkService();
+        NetworkService networkService = NetworkService.getInstance();
         //On initialise une liste d'observable qui correspondent aux données que l'on veut rentrer dans la table
         List<Bug> data = networkService.getListBugByStatut(0);
         this.associateColumnBugData();

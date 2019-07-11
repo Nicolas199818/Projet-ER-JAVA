@@ -52,7 +52,7 @@ public class EvolutionActivite implements Initializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         c.setTime(date);
         XYChart.Series<String,Number> serie = new XYChart.Series();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         c.add(Calendar.MONTH, -10);
         date = c.getTime();
 
@@ -97,7 +97,7 @@ public class EvolutionActivite implements Initializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         c.setTime(date);
         XYChart.Series<String,Number> serie = new XYChart.Series();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         c.add(Calendar.MONTH, -10);
         date = c.getTime();
 
@@ -141,7 +141,7 @@ public class EvolutionActivite implements Initializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         c.setTime(date);
         XYChart.Series<String,Number> serie = new XYChart.Series();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         c.add(Calendar.MONTH, -10);
         date = c.getTime();
 
@@ -194,7 +194,7 @@ public class EvolutionActivite implements Initializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         c.setTime(date);
         XYChart.Series<String,Number> serie = new XYChart.Series();
-        NetworkService network = new NetworkService();
+        NetworkService network = NetworkService.getInstance();
         c.add(Calendar.MONTH, -10);
         date = c.getTime();
 
