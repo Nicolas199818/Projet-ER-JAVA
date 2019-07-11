@@ -142,56 +142,10 @@ public class NetworkService {
             JSONArray arr = obj.getJSONArray("bugs");
             List<Bug> data = new ArrayList<>();
             for (int i = 0; i < arr.length(); i++) {
-                data.add(new Bug(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("createdAt"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("userID")));
-                String post_id = arr.getJSONObject(i).getString("content");
-            }
-            return data;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-        }
-        return null;
-    }
-
-    public ObservableList<Bug> getListBug(){
-        HttpURLConnection con;
-        String url = "http://localhost:3000/bugAdmin/getAll";
-        try {
-
-            URL myurl = new URL(url);
-            con = (HttpURLConnection) myurl.openConnection();
-
-            con.setDoOutput(true);
-            con.setRequestMethod("GET");
-            con.setRequestProperty("UserGestionToken-Agent", "Java client");
-            con.setRequestProperty("Content-Type","application/json");
-            con.setRequestProperty("x-access-token", UserGestionToken.getToken());
-
-            int statusRequest =  con.getResponseCode();
-            StringBuilder content;
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
+                if(arr.getJSONObject(i).has("_id") && arr.getJSONObject(i).has("createdAt") && arr.getJSONObject(i).has("type") && arr.getJSONObject(i).has("status") && arr.getJSONObject(i).has("userID")){
+                    data.add(new Bug(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("createdAt"),arr.getJSONObject(i).getString("content"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("userID")));
                 }
             }
-            //System.out.println(content);
-            JSONObject obj = new JSONObject(content.toString());
-
-            JSONArray arr = obj.getJSONArray("bugs");
-            ObservableList<Bug> data = FXCollections.observableArrayList();
-            for (int i = 0; i < arr.length(); i++) {
-
-                data.add(new Bug(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("createdAt"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("userID")));
-
-                String post_id = arr.getJSONObject(i).getString("content");
-                //System.out.println(post_id);
-            }
-
             return data;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -250,7 +204,6 @@ public class NetworkService {
         HttpURLConnection con;
         String url = "http://localhost:3000/adminEr/getAll";
         try {
-            System.out.println("Le token du user : "+ UserGestionToken.getToken());
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
@@ -273,7 +226,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("exenses");
@@ -297,7 +249,6 @@ public class NetworkService {
         HttpURLConnection con;
         String url = "http://localhost:3000/adminEr/erByCompany";
         try {
-            System.out.println("Le id de la company : "+idCompany);
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
             con.setDoOutput(true);
@@ -325,7 +276,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("er");
@@ -353,7 +303,6 @@ public class NetworkService {
         HttpURLConnection con;
         String url = "http://localhost:3000/adminCompany/getAll";
         try {
-            System.out.println("Le token du user : "+ UserGestionToken.getToken());
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
@@ -376,7 +325,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("companies");
@@ -401,7 +349,6 @@ public class NetworkService {
         HttpURLConnection con;
         String url = "http://localhost:3000/admin/getUserByIdCompany";
         try {
-            System.out.println("Le id de la company : "+idCompany);
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
             con.setDoOutput(true);
@@ -429,7 +376,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("users");
@@ -478,7 +424,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            //System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("users");
@@ -526,7 +471,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            //System.out.println(content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("bugs");
@@ -536,7 +480,7 @@ public class NetworkService {
                 listData.add(new Bug(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("createdAt"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getString("type"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("userID")));
 
                 String post_id = arr.getJSONObject(i).getString("content");
-                //System.out.println(post_id);
+
             }
 
             return listData;

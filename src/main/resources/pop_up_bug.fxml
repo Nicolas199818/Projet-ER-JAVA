@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -12,20 +13,20 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="id Bug :" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="80.0" />
-      <Label alignment="CENTER" fx:id="label_id" text="l'id est null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="80.0" />
-      <Label alignment="CENTER" text="Date de création" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="130.0" />
-      <Label alignment="CENTER" fx:id="label_date_creation" text="la date est null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="130.0" />
-      <Label alignment="CENTER" text="Contenu" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="180.0" />
-      <Label alignment="CENTER" fx:id="label_content" text="Le contenu est null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.0" />
-      <Label alignment="CENTER" text="Type" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="230.0" />
-      <Label alignment="CENTER" fx:id="label_type" text="Le type est null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="230.0" />
-      <Label alignment="CENTER" text="Status du Bug" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="280.0" />
-      <Label alignment="CENTER" fx:id="label_status" text="Le statut est à null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="280.0" />
-      <Label alignment="CENTER" text="Id du User :" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="330.0" />
-      <Label alignment="CENTER" fx:id="label_id_user" text="id user est null" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="330.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" text="id Bug :" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="80.0" />
+      <Label fx:id="label_id" alignment="CENTER" text="l'id est null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="80.0" />
+      <Label alignment="CENTER" text="Date de création" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="130.0" />
+      <Label fx:id="label_date_creation" alignment="CENTER" text="la date est null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="130.0" />
+      <Label alignment="CENTER" text="Contenu" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="180.0" />
+      <TextArea fx:id="text_content" prefHeight="35.0" text="Le contenu est null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.0" />
+      <Label alignment="CENTER" text="Type" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="230.0" />
+      <Label fx:id="label_type" alignment="CENTER" text="Le type est null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="230.0" />
+      <Label alignment="CENTER" text="Status du Bug" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="280.0" />
+      <Label fx:id="label_status" alignment="CENTER" text="Le statut est à null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="280.0" />
+      <Label alignment="CENTER" text="Id du User :" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="330.0" />
+      <Label fx:id="label_id_user" alignment="CENTER" text="id user est null" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="330.0" />
 
-      <Button alignment="CENTER" onAction="#annuler" mnemonicParsing="false" text="Annuler" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="430.0" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#annuler" text="Annuler" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="430.0" />
       <Button mnemonicParsing="false" onAction="#resoudre" text="Résoudre" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="430.0" />
    </children>
 </AnchorPane>

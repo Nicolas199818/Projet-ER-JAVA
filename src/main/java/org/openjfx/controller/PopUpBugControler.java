@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.openjfx.data.Bug;
@@ -20,7 +21,7 @@ public class PopUpBugControler implements Initializable {
     @FXML
     private Label label_date_creation;
     @FXML
-    private Label label_content;
+    private TextArea text_content;
     @FXML
     private Label label_type;
     @FXML
@@ -76,8 +77,8 @@ public class PopUpBugControler implements Initializable {
         return label_date_creation;
     }
 
-    public Label getLabel_content() {
-        return label_content;
+    public TextArea getText_content() {
+        return text_content;
     }
 
     public Label getLabel_type() {

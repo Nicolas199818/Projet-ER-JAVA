@@ -37,7 +37,7 @@ public class SignUpController {
     public void seConnecter(ActionEvent event){
         BorderPane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/bugs.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/main_pages.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -51,32 +51,7 @@ public class ControllerAccueil implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Bug rowData = row.getItem();
-                    //C'est le moment où l'on décide ce que l'on veut faire.
-                    System.out.println(rowData);
-                    Stage stage = new Stage();
-                    AnchorPane idPage = null;
-                    try {
-                        System.out.println("Controller Accueil  ----------"+rowData.getContenu());
-                        //PopUpBugControler dialogController = new PopUpBugControler(rowData.getIdBug(),rowData.getDate(),rowData.getContenu(),rowData.getType(),rowData.getStatus(),rowData.getUser());
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/pop_up_bug.fxml"));
-                        idPage = (AnchorPane) loader.load();
-                        PopUpBugControler controler = loader.getController();
-                        controler.getLabel_id().setText(rowData.getIdBug());
-                        controler.getLabel_date_creation().setText(rowData.getDate());
-                        controler.getLabel_content().setText(rowData.getContenu());
-                        controler.getLabel_type().setText(rowData.getType());
-                        controler.getLabel_status().setText(rowData.getStatus());
-                        controler.getLabel_id_user().setText(rowData.getUser());
-                        controler.setTable(myTable);
-
-
-                        //idPage = FXMLLoader.load(App.class.getResource("/pop_up_bug.fxml"));
-                        stage.setScene(new Scene(idPage));
-                        stage.show();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    this.openPopUpByBug(rowData);
 
                 }
             });
@@ -110,7 +85,28 @@ public class ControllerAccueil implements Initializable {
     }
 
     //On fait une fonction qui à partir d'un bug ouvrir la popUp
-    public void openPopUpByBug(){
-        
+    public void openPopUpByBug(Bug rowData){
+        Stage stage = new Stage();
+        AnchorPane idPage;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pop_up_bug.fxml"));
+            idPage = (AnchorPane) loader.load();
+            PopUpBugControler controler = loader.getController();
+            controler.getLabel_id().setText(rowData.getIdBug());
+            controler.getLabel_date_creation().setText(rowData.getDate());
+            controler.getText_content().setText(rowData.getContenu());
+            controler.getLabel_type().setText(rowData.getType());
+            controler.getLabel_status().setText(rowData.getStatus());
+            controler.getLabel_id_user().setText(rowData.getUser());
+            controler.setTable(myTable);
+
+
+            //idPage = FXMLLoader.load(App.class.getResource("/pop_up_bug.fxml"));
+            stage.setScene(new Scene(idPage));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

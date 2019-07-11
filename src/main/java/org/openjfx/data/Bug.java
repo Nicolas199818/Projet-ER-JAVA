@@ -25,10 +25,10 @@ public class Bug {
         this.contenu = new SimpleStringProperty(contenu);
         this.type = new SimpleStringProperty(type);
         if(status == 0){
-            this.status = new SimpleStringProperty("Bug en cours de traitement");
+            this.status = new SimpleStringProperty("Resolution in progress");
         }
         else {
-            this.status = new SimpleStringProperty("Bug traité");
+            this.status = new SimpleStringProperty("Bug resolved");
         }
         this.user = new SimpleStringProperty(user);
     }

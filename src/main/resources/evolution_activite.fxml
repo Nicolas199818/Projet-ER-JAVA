@@ -4,12 +4,11 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedBarChart?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="800.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controller.EvolutionActivite">
    <center>
@@ -17,6 +16,11 @@
          <children>
             <VBox>
                <children>
+                  <Label text="Evolution of the number of users : " textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                   <StackedBarChart fx:id="stackBarChartUser" prefHeight="150.0" prefWidth="900.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -24,7 +28,14 @@
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
                   </StackedBarChart>
+                  <Label text="Evolution of the number of bugs : ">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                   <StackedBarChart fx:id="stackBarChartBug" prefHeight="150.0" prefWidth="900.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -32,7 +43,14 @@
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
                   </StackedBarChart>
+                  <Label text="Evolution of the number of companies : ">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                   <StackedBarChart fx:id="stackBarChartCompany" prefHeight="150.0" prefWidth="900.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -40,7 +58,14 @@
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
                   </StackedBarChart>
+                  <Label text="Evolution of the number of money : ">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
                   <StackedBarChart fx:id="stackBarChartArgent" prefHeight="150.0" prefWidth="900.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -48,10 +73,26 @@
                     <yAxis>
                       <NumberAxis side="LEFT" />
                     </yAxis>
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
                   </StackedBarChart>
                </children></VBox>
          </children>
+         <BorderPane.margin>
+            <Insets top="30.0" />
+         </BorderPane.margin>
       </AnchorPane>
    </center>
+   <top>
+      <Label text="Evolution of the company since its creation :" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets left="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
 
 </BorderPane>
