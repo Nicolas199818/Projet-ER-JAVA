@@ -19,7 +19,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         idPage = FXMLLoader.load(App.class.getResource("/identification_page.fxml"));
-        stage.setMinHeight(500);
+        stage.setMinHeight(530);
         stage.setMinWidth(300);
         stage.setMaxWidth(500);
         stage.setMaxHeight(600);

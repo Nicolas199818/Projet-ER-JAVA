@@ -35,13 +35,14 @@ public class IdentificationPage {
         /*C'est ici que l'on mettra le code pour checker que ça marche avec la base*/
 
         BorderPane root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/main_pages.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         NetworkService network = NetworkService.getInstance();
         if(network.signInUser(login.getText(),password.getText())==200){
+            try {
+                root = FXMLLoader.load(getClass().getResource("/main_pages.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Node source = (Node) event.getSource();
             Window theStage = source.getScene().getWindow();
             Stage currentStage = (Stage)theStage.getScene().getWindow();
@@ -58,6 +59,7 @@ public class IdentificationPage {
         }
         else {
             //On affiche un message en rouge en bas de la page.
+            labelerror.setText("Connexion failed");
             labelerror.setWrapText(true);
             labelerror.setVisible(true);
 
