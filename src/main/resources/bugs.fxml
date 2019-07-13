@@ -7,29 +7,34 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ScrollPane?>
 <BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.controller.ControllerAccueil">
-   <center>
-      <TableView fx:id="myTable" BorderPane.alignment="CENTER">
-        <columns>
-            <TableColumn prefWidth="150.0" text="Id_Bug" />
-            <TableColumn prefWidth="150.0" text="Date de création" />
-            <TableColumn prefWidth="400.0" text="Contenu" />
-            <TableColumn prefWidth="150.0" text="Type" />
-            <TableColumn prefWidth="150.0" text="Status" />
-            <TableColumn prefWidth="150.0" text="User" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-   </center>
-   <top>
-      <Label text="La liste des bugs :" BorderPane.alignment="TOP_LEFT">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets left="10.0" />
-         </BorderPane.margin></Label>
-   </top>
+    <center>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <content>
+                <TableView fx:id="myTable" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn prefWidth="150.0" text="Id_Bug" />
+                        <TableColumn prefWidth="150.0" text="Date de création" />
+                        <TableColumn prefWidth="400.0" text="Contenu" />
+                        <TableColumn prefWidth="150.0" text="Type" />
+                        <TableColumn prefWidth="150.0" text="Status" />
+                        <TableColumn prefWidth="150.0" text="User" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </content>
+        </ScrollPane>
+    </center>
+    <top>
+        <Label text="La liste des bugs :" BorderPane.alignment="TOP_LEFT">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <BorderPane.margin>
+                <Insets left="10.0" />
+            </BorderPane.margin></Label>
+    </top>
 </BorderPane>

@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 public class SignUpController {
     //On récupère les éléments graphiques :
     @FXML
@@ -70,6 +72,7 @@ public class SignUpController {
             }
         }
         else {
+            System.out.println(lastname.getText()+" : "+firstname.getText());
             labelerror.setText(this.messageConnexion(firstname.getText(),lastname.getText(),password.getText(),login.getText()));
             labelerror.setWrapText(true);
             labelerror.setVisible(true);
@@ -97,54 +100,62 @@ public class SignUpController {
     //On fait une fonction qui permet de déterminer si un paramètre est bon ou pas
     private boolean isFirstAndLastNameOk(String lastname,String firstname){
         //On test pour la longueur des noms et des prénoms.
-        if(lastname.length()<2 && lastname.length()>50){
+        if(lastname.length()<2 || lastname.length()>50){
             return false;
         }
-        if(firstname.length()<2 && firstname.length()>50){
+        if(firstname.length()<2 || firstname.length()>50){
             return false;
         }
-        //On test les caractères spéciaux :
 
-        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+
+        Pattern pattern = Pattern.compile("^[a-zA-Z]*$", Pattern.CASE_INSENSITIVE);
+
         Matcher matcher = pattern.matcher(firstname);
         boolean nameSpecial = matcher.find();
 
-        if (nameSpecial){
+        if (!nameSpecial){
             return false;
         }
-        pattern.matcher(lastname);
+
+
+
+        matcher = pattern.matcher(lastname);
         boolean firstNameSpecial = matcher.find();
-        if(firstNameSpecial){
+        if(!firstNameSpecial){
             return false;
         }
+
         return true;
     }
 
     //On fait une fonction pour checker si le password est ok :
     private boolean isPasswordOk(String password){
-        if(password.length()<4 && password.length()>50){
+        if(password.length()<4 || password.length()>50){
             return false;
         }
         return true;
     }
 
     private boolean isEmailOk(String email){
-        if(!email.contains("@")){
-            return false;
-        }
-        else{
-            return true;
-        }
+        //^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$
+        Pattern pattern = Pattern.compile("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$", Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = pattern.matcher(email);
+        boolean emailOk = matcher.find();
+
+        return emailOk;
     }
 
     private String messageConnexion(String firstname,String lastname,String password,String email){
-        if(isFirstAndLastNameOk(firstname,lastname)){
+
+
+        if(!isFirstAndLastNameOk(firstname,lastname)){
             return "Firstname and lastname must be between 2 et 50 characters without special characters";
         }
-        if(this.isEmailOk(email)){
+        else if(!this.isEmailOk(email)){
             return "Email is not valid";
         }
-        if(this.isPasswordOk(password)){
+        else if(!this.isPasswordOk(password)){
             return "Password length must be between 4 et 50 caractères";
         }
         return "Ok";
