@@ -33,7 +33,3 @@ public class App extends Application {
     }
 
 }
-//Faire la pop Up permettant de faire le changement de status d'un bug
-//Faire le bouton permettant de faire la transition vers la page de statistics
-
-//Prochaine étape : Mettre en place la pop Up pour s'incrire.

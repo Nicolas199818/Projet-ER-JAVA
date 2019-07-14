@@ -1,6 +1,5 @@
 package org.openjfx.controller;
 
-import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,8 +61,6 @@ public class Statistics implements Initializable {
         totalCompanyCircle.setText(""+listCompany.size()+"\n companies");
         totalBugCircle.setText(""+listBug.size()+"\n bugs");
 
-
-        //On va Initialiser les graphiques
         pieChart.setLabelsVisible(false);
         pieChartEr.setLabelsVisible(false);
         pieChartUser.setLabelsVisible(false);
@@ -115,7 +112,6 @@ public class Statistics implements Initializable {
         currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
     }
 
-    //On fait une fonction qui permet de récupérer la somme à partir d'une liste de notes de frais :
     private int getSommeERByList(List<ExpenseReport> listER){
         int somme = 0;
         for(ExpenseReport er:listER){
@@ -124,13 +120,10 @@ public class Statistics implements Initializable {
         return somme;
     }
 
-    //On fait une fonction qui permet de renvoyer une observable avec les 5 plus grosse entreprises ainsi qu'une case "Autre" en fonction de l'argent.
     public ObservableList<PieChart.Data> getListCompanyPieChart(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         if(listCompany.size()<5){
-            //Pour toutes les companies que l'on a : On prend les companies et on prend la liste des notes de frais de cette companies en calculant le total
             for(Company company:listCompany){
-                System.out.println(" Le diagramme ne s'affiche pas "+company.getIdCompany());
                 if(getListErByCompany(company.getIdCompany(),listER)!=null){
                     listData.add(new PieChart.Data(company.getName()+" : "+getSommeERByList(getListErByCompany(company.getIdCompany(),listER)),getSommeERByList(getListErByCompany(company.getIdCompany(),listER))));
                 }
@@ -147,14 +140,12 @@ public class Statistics implements Initializable {
             });
             for(int i=0;i < 5;i++){
                 listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getSommeERByList(getListErByCompany(listCompany.get(i).getIdCompany(),listER)),getSommeERByList(getListErByCompany(listCompany.get(i).getIdCompany(),listER))));
-                //System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies");
             }
 
         }
         return listData;
     }
 
-    //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de notes de frais :
     public ObservableList<PieChart.Data> getListCompaniePieChartER(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         if(listCompany.size()<5){
@@ -175,18 +166,12 @@ public class Statistics implements Initializable {
             });
             for(int i=0;i < 5;i++){
                 listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getListErByCompany(listCompany.get(i).getIdCompany(),listER).size(),getListErByCompany(listCompany.get(i).getIdCompany(),listER).size()));
-
-                //System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies");
             }
         }
-
-
-
         return listData;
     }
 
 
-    //A partir du java, on va envoyer l'id de la company. On recevra alors les différents utilisateurs :
     public ObservableList<PieChart.Data> getListCompaniePieChartUser(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         NetworkService network = NetworkService.getInstance();
@@ -208,13 +193,12 @@ public class Statistics implements Initializable {
             });
             for(int i=0;i < listCompany.size();i++){
                 listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getListUserByCompany(listCompany.get(i).getIdCompany(),listUser).size(),getListUserByCompany(listCompany.get(i).getIdCompany(),listUser).size()));
-                System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies de la muerte");
             }
         }
         return listData;
     }
 
-    // On fait une fonction qui renvoit une liste de user à partir d'un id de company :
+
     public List<User> getListUserByCompany(String idCompany,List<User> listUser){
         List listUserCompany = new ArrayList();
         for(User user:listUser){
@@ -231,29 +215,9 @@ public class Statistics implements Initializable {
         for(ExpenseReport er:listER){
             if(er.getCompanyID().equals(idCompany)){
                 listERCompany.add(er);
-                System.out.println(er.getCompanyID());
             }
         }
-        System.out.println("La taille que l'on récupère est : "+listERCompany.size());
         return listERCompany;
     }
 
 }
-
-//Comment est-ce que tu vas organiser les statistiques ?
-    //Les Chiffres Clés : On a le nombre de notes de frais / La total argent en jeux. / nombre total d'entreprise / Nombre total de Bugs.
-    //Un diagramme de l'argent dépensés par entreprise.
-    //Les différents indicateurs par entreprises.
-    //Un diagramme de l'argent dépensés par domaine.
-    //Un diagramme permettant de voir l'écolution des dépenses sur les derniers mois.
-    //Un diagramme permettant de suivre l'évolution des bugs dans les derniers mois.
-    //Un diagramme permettant de suivre l'évolution du nombre d'entreprise au ful des mois.
-    //Un diagramme permettant du suivre l'évolution du nombre de notes de frais.
-
-
-//On veut récupérer la liste des entreprises :
-    //Faire la requete dans POSTMAN pour créer deux companies
-    //On récupère le diagramme des 5 plus grandes entreprises en mettant leurs noms et entre parenthèdes la thune qu'elles rapportent ?
-
-//PROBLEME :
-//Il faut faire un utilisateur Java qui puisse prendre les données sans problème de token.

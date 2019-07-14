@@ -32,7 +32,6 @@ public class IdentificationPage {
 
     @FXML
     public void test(ActionEvent event){
-        /*C'est ici que l'on mettra le code pour checker que ça marche avec la base*/
 
         BorderPane root = null;
 
@@ -58,7 +57,6 @@ public class IdentificationPage {
             currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
         }
         else {
-            //On affiche un message en rouge en bas de la page.
             labelerror.setText("Connexion failed");
             labelerror.setWrapText(true);
             labelerror.setVisible(true);

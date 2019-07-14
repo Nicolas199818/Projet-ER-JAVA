@@ -13,7 +13,7 @@ import org.openjfx.data.*;
 
 
 public class NetworkService {
-    private String apiPath = "http://localhost:3000/";
+    private String apiPath = "https://fast-fortress-46146.herokuapp.com/";
 
     private static NetworkService instance;
 
@@ -149,7 +149,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            //System.out.println(content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("bugs");
@@ -167,7 +166,6 @@ public class NetworkService {
         return null;
     }
 
-    //On fait une fonction pour la réolution du bug.
     public int resolveBug(String idBug,int status){
         HttpURLConnection con;
         String url = apiPath+"bugAdmin/updateStatus";
@@ -246,7 +244,6 @@ public class NetworkService {
                 if(!arr.getJSONObject(i).isNull("_id") && !arr.getJSONObject(i).isNull("companyID") && !arr.getJSONObject(i).isNull("price") && !arr.getJSONObject(i).isNull("vat") && !arr.getJSONObject(i).isNull("address") && !arr.getJSONObject(i).isNull("status") && !arr.getJSONObject(i).isNull("createdAt") &&  !arr.getJSONObject(i).isNull("userID")) {
 
                     listExpenseReport.add(new ExpenseReport(arr.getJSONObject(i).getString("_id"), arr.getJSONObject(i).getString("companyID"), arr.getJSONObject(i).getInt("price"), arr.getJSONObject(i).getInt("vat"), arr.getJSONObject(i).getString("address"), arr.getJSONObject(i).getInt("status"), arr.getJSONObject(i).getString("createdAt"), "lastUpdatedAt", "repayementAt", arr.getJSONObject(i).getString("userID"), "imageID"));
-                    System.out.println("VOOOUUUSS NE PASSSERRREZZZZ PASSS"+listExpenseReport.size());
                 }
             }
 
@@ -303,7 +300,6 @@ public class NetworkService {
 
     }
 
-    //On fait une fonction qui récupère la liste des user
     public List<User> getListAllUser(){
         HttpURLConnection con;
         String url = apiPath+"admin/getAllUser";
@@ -331,7 +327,6 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
-            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("users");
@@ -398,4 +393,3 @@ public class NetworkService {
         return null;
     }
 }
-//Bien check avec isNull pour l'ensemble des requetes restantes.

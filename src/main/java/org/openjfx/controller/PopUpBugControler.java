@@ -46,7 +46,6 @@ public class PopUpBugControler implements Initializable {
     //On catch le click sur Annuler pour fermer la pop Up
     @FXML
     public void annuler(ActionEvent event){
-        System.out.println("nicolas");
         Node source = (Node) event.getSource();
         Window theStage = source.getScene().getWindow();
         Stage currentStage = (Stage)theStage.getScene().getWindow();
@@ -56,8 +55,6 @@ public class PopUpBugControler implements Initializable {
 
     @FXML
     public void resoudre(ActionEvent event){
-        //Etape 1 : Faire une méthode dans le Network qui permet de réaliser la résolution d'un bug.
-        //Etape 2 : L'appelé ici.
         NetworkService network = NetworkService.getInstance();
         network.resolveBug(this.getLabel_id().getText(),1);
         Node source = (Node) event.getSource();
@@ -67,7 +64,6 @@ public class PopUpBugControler implements Initializable {
         table.getItems().remove(selectedItem);
         currentStage.close();
     }
-    //On fait un constructeur du controller. Ce qui permet de passer les données.
 
 
     public Label getLabel_id() {

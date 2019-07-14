@@ -81,8 +81,6 @@ public class ExpenseReport {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         try {
             Date userDate = dateFormat.parse(this.createdAt);
-            System.out.println("La date du user : "+ dateFormat.parse(this.createdAt));
-            //System.out.println("autre format "+date);
             if(userDate.compareTo(date)<=0){
                 return true;
             }

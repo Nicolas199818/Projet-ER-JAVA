@@ -49,7 +49,6 @@ public class EvolutionActivite implements Initializable {
 
     }
 
-    //On fait une fonction qui prend une date et qui pour les 12 derniers mois liste le nombre de user en base sous forme de Series.
     public XYChart.Series<String, Number> getSeriesUser(){
         Date date = new Date();
         XYChart.Series<String,Number> serie = new XYChart.Series();
@@ -67,7 +66,6 @@ public class EvolutionActivite implements Initializable {
         return serie;
     }
 
-    //On fait une fonction qui ne prend que les users qui ont une date de création inférieur à celle donnée :
     public List<User> getListUserBefore(List<User> listUser, Date date){
         List<User> listUserBefore = new ArrayList<User>();
 
@@ -122,22 +120,15 @@ public class EvolutionActivite implements Initializable {
             c.add(Calendar.MONTH, +1);
             date = c.getTime();
         }
-        //On retourne le Series et on le
         return serie;
     }
 
     public List<Bug> getListBugBefore(List<Bug> listBug, Date date){
         List<Bug> listBugBefore = new ArrayList<Bug>();
-        System.out.println();
-        System.out.println();
-        //System.out.println(date);
 
         for(Bug bug : listBug){
             if(bug.isBefore(date)){
                 listBugBefore.add(bug);
-                //System.out.println(listUserBefore.size());
-                //System.out.println(date);
-                System.out.println("Test des companys : "+bug);
             }
         }
         return listBugBefore;
@@ -174,13 +165,10 @@ public class EvolutionActivite implements Initializable {
 
     public List<ExpenseReport> getListErArgentBefore(List<ExpenseReport> listEr,Date date){
         List<ExpenseReport> listErBefore = new ArrayList<>();
-        System.out.println();
-        System.out.println();
 
         for(ExpenseReport expenseReport: listEr){
             if(expenseReport.isBefore(date)){
                 listErBefore.add(expenseReport);
-                System.out.println("Test des companys : "+expenseReport);
             }
         }
         return listErBefore;

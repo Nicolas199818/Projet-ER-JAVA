@@ -64,7 +64,6 @@ public class SignUpController {
                 currentStage.setX((primScreenBounds.getWidth() - currentStage.getWidth()) / 2);
                 currentStage.setY((primScreenBounds.getHeight() - currentStage.getHeight()) / 2);
             } else {
-                //On affiche un message en rouge en bas de la page.
                 labelerror.setText("Connexion problem");
                 labelerror.setWrapText(true);
                 labelerror.setVisible(true);
@@ -99,7 +98,6 @@ public class SignUpController {
 
     //On fait une fonction qui permet de déterminer si un paramètre est bon ou pas
     private boolean isFirstAndLastNameOk(String lastname,String firstname){
-        //On test pour la longueur des noms et des prénoms.
         if(lastname.length()<2 || lastname.length()>50){
             return false;
         }
@@ -128,7 +126,6 @@ public class SignUpController {
         return true;
     }
 
-    //On fait une fonction pour checker si le password est ok :
     private boolean isPasswordOk(String password){
         if(password.length()<4 || password.length()>50){
             return false;
@@ -137,7 +134,6 @@ public class SignUpController {
     }
 
     private boolean isEmailOk(String email){
-        //^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$
         Pattern pattern = Pattern.compile("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$", Pattern.CASE_INSENSITIVE);
 
         Matcher matcher = pattern.matcher(email);

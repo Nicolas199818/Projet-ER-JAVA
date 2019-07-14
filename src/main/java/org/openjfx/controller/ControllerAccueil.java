@@ -37,15 +37,11 @@ public class ControllerAccueil implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.initialiseColumn();
         NetworkService networkService = NetworkService.getInstance();
-        //On initialise une liste d'observable qui correspondent aux données que l'on veut rentrer dans la table
         List<Bug> data = networkService.getListBugByStatut(0);
         this.associateColumnBugData();
 
 
-        //On met les données dans le table :
         myTable.setItems(this.transformToObservable(data));
-
-        // On rend le double clic possible. :
         myTable.setRowFactory( tv -> {
             TableRow<Bug> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -59,7 +55,6 @@ public class ControllerAccueil implements Initializable {
         });
     }
 
-    //On fait une fonction pour initialiser les colonnes.
     private void initialiseColumn(){
         this.idBug = (javafx.scene.control.TableColumn) myTable.getColumns().get(0);
         this.dateCreation = (TableColumn) myTable.getColumns().get(1);
@@ -69,7 +64,6 @@ public class ControllerAccueil implements Initializable {
         this.user = (TableColumn) myTable.getColumns().get(5);
     }
 
-    //Associer les données des objets Bugs avec
     private void associateColumnBugData(){
         idBug.setCellValueFactory(new PropertyValueFactory<Bug,String>("idBug"));
         dateCreation.setCellValueFactory(new PropertyValueFactory<Bug,String>("date"));
@@ -79,12 +73,10 @@ public class ControllerAccueil implements Initializable {
         user.setCellValueFactory(new PropertyValueFactory<Bug,String>("user"));
     }
 
-    //On fait une fonction qui transforme une list en une observableList.
     private ObservableList transformToObservable(List list){
         return FXCollections.observableList(list);
     }
 
-    //On fait une fonction qui à partir d'un bug ouvrir la popUp
     public void openPopUpByBug(Bug rowData){
         Stage stage = new Stage();
         AnchorPane idPage;
@@ -101,7 +93,6 @@ public class ControllerAccueil implements Initializable {
             controler.setTable(myTable);
 
 
-            //idPage = FXMLLoader.load(App.class.getResource("/pop_up_bug.fxml"));
             stage.setScene(new Scene(idPage));
             stage.show();
 
