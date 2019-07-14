@@ -243,58 +243,11 @@ public class NetworkService {
             JSONArray arr = obj.getJSONArray("exenses");
             List<ExpenseReport> listExpenseReport = new ArrayList<ExpenseReport>();
             for (int i = 0; i < arr.length(); i++) {
-                listExpenseReport.add(new ExpenseReport(arr.getJSONObject(i).getString("_id"),"id de la compagnie",arr.getJSONObject(i).getInt("price"),arr.getJSONObject(i).getInt("vat"),arr.getJSONObject(i).getString("address"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("createdAt"),"lastUpdatedAt","repayementAt",arr.getJSONObject(i).getString("userID"),"imageID"));
+                if(!arr.getJSONObject(i).isNull("_id") && !arr.getJSONObject(i).isNull("companyID") && !arr.getJSONObject(i).isNull("price") && !arr.getJSONObject(i).isNull("vat") && !arr.getJSONObject(i).isNull("address") && !arr.getJSONObject(i).isNull("status") && !arr.getJSONObject(i).isNull("createdAt") &&  !arr.getJSONObject(i).isNull("userID")) {
 
-            }
-
-            return listExpenseReport;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<ExpenseReport> getListExpenseReportByCompany(String idCompany){
-        HttpURLConnection con;
-        String url = apiPath+"adminEr/erByCompany";
-        try {
-            URL myurl = new URL(url);
-            con = (HttpURLConnection) myurl.openConnection();
-            con.setDoOutput(true);
-            con.setRequestMethod("POST");
-            con.setRequestProperty("UserGestionToken-Agent", "Java client");
-            con.setRequestProperty("Content-Type","application/json");
-            con.setRequestProperty("x-access-token", UserGestionToken.getToken());
-
-            JSONObject object = new JSONObject();
-            object.put("companyID",idCompany);
-            OutputStream os = con.getOutputStream();
-            os.write(object.toString().getBytes("UTF-8"));
-            os.close();
-
-
-            int statusRequest =  con.getResponseCode();
-            StringBuilder content;
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
+                    listExpenseReport.add(new ExpenseReport(arr.getJSONObject(i).getString("_id"), arr.getJSONObject(i).getString("companyID"), arr.getJSONObject(i).getInt("price"), arr.getJSONObject(i).getInt("vat"), arr.getJSONObject(i).getString("address"), arr.getJSONObject(i).getInt("status"), arr.getJSONObject(i).getString("createdAt"), "lastUpdatedAt", "repayementAt", arr.getJSONObject(i).getString("userID"), "imageID"));
+                    System.out.println("VOOOUUUSS NE PASSSERRREZZZZ PASSS"+listExpenseReport.size());
                 }
-            }
-            JSONObject obj = new JSONObject(content.toString());
-
-            JSONArray arr = obj.getJSONArray("er");
-            //On configure la classe ExpenseExport avec les différents champs et on ajoute avec les données que l'on récupère.
-            List<ExpenseReport> listExpenseReport = new ArrayList<ExpenseReport>();
-            for (int i = 0; i < arr.length(); i++) {
-                listExpenseReport.add(new ExpenseReport(arr.getJSONObject(i).getString("_id"),"id de la compagnie",arr.getJSONObject(i).getInt("price"),arr.getJSONObject(i).getInt("vat"),arr.getJSONObject(i).getString("address"),arr.getJSONObject(i).getInt("status"),arr.getJSONObject(i).getString("createdAt"),"lastUpdatedAt","repayementAt",arr.getJSONObject(i).getString("userID"),"imageID"));
-
             }
 
             return listExpenseReport;
@@ -350,55 +303,6 @@ public class NetworkService {
 
     }
 
-    public List<User> getListUserByCompany(String idCompany){
-        HttpURLConnection con;
-        String url = apiPath+"admin/getUserByIdCompany";
-        try {
-            URL myurl = new URL(url);
-            con = (HttpURLConnection) myurl.openConnection();
-            con.setDoOutput(true);
-            con.setRequestMethod("POST");
-            con.setRequestProperty("UserGestionToken-Agent", "Java client");
-            con.setRequestProperty("Content-Type","application/json");
-            con.setRequestProperty("x-access-token", UserGestionToken.getToken());
-
-            JSONObject object = new JSONObject();
-            object.put("companyID",idCompany);
-            OutputStream os = con.getOutputStream();
-            os.write(object.toString().getBytes("UTF-8"));
-            os.close();
-
-
-            int statusRequest =  con.getResponseCode();
-            StringBuilder content;
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-            }
-            JSONObject obj = new JSONObject(content.toString());
-
-            JSONArray arr = obj.getJSONArray("users");
-            List<User> listUser = new ArrayList<User>();
-            for (int i = 0; i < arr.length(); i++) {
-                listUser.add(new User(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("lastname"),arr.getJSONObject(i).getString("firstname"),arr.getJSONObject(i).getString("email"),arr.getJSONObject(i).getString("createdAt")));
-
-            }
-
-            return listUser;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     //On fait une fonction qui récupère la liste des user
     public List<User> getListAllUser(){
         HttpURLConnection con;
@@ -415,6 +319,7 @@ public class NetworkService {
 
 
             int statusRequest =  con.getResponseCode();
+
             StringBuilder content;
             try (BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()))) {
@@ -426,13 +331,16 @@ public class NetworkService {
                     content.append(System.lineSeparator());
                 }
             }
+            System.out.println("content : "+content);
             JSONObject obj = new JSONObject(content.toString());
 
             JSONArray arr = obj.getJSONArray("users");
             List<User> listUser = new ArrayList<User>();
             for (int i = 0; i < arr.length(); i++) {
-                listUser.add(new User(arr.getJSONObject(i).getString("_id"),arr.getJSONObject(i).getString("lastname"),arr.getJSONObject(i).getString("firstname"),arr.getJSONObject(i).getString("email"),arr.getJSONObject(i).getString("createdAt")));
+                if(!arr.getJSONObject(i).isNull("_id") && !arr.getJSONObject(i).isNull("lastname") && !arr.getJSONObject(i).isNull("firstname") && !arr.getJSONObject(i).isNull("email") && !arr.getJSONObject(i).isNull("createdAt") && !arr.getJSONObject(i).isNull("companyID")) {
 
+                    listUser.add(new User(arr.getJSONObject(i).getString("_id"), arr.getJSONObject(i).getString("lastname"), arr.getJSONObject(i).getString("firstname"), arr.getJSONObject(i).getString("email"), arr.getJSONObject(i).getString("createdAt"), arr.getJSONObject(i).getString("companyID")));
+                }
             }
 
             return listUser;
@@ -490,3 +398,4 @@ public class NetworkService {
         return null;
     }
 }
+//Bien check avec isNull pour l'ensemble des requetes restantes.

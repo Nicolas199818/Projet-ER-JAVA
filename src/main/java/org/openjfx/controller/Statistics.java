@@ -1,5 +1,6 @@
 package org.openjfx.controller;
 
+import com.fasterxml.jackson.databind.deser.impl.ObjectIdReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,19 +16,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.openjfx.data.Bug;
 import org.openjfx.data.Company;
 import org.openjfx.data.ExpenseReport;
+import org.openjfx.data.User;
 import org.openjfx.service.NetworkService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Statistics implements Initializable {
-    //On récupère les différents éléments avec FXML :
     @FXML
     private Label totalERCircle;
     @FXML
@@ -43,23 +42,32 @@ public class Statistics implements Initializable {
     @FXML
     private PieChart pieChartUser;
 
+    NetworkService networkService;
+    List<ExpenseReport> listER;
+    List<Company> listCompany;
+    List<Bug> listBug;
+    List<User> listUser;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        networkService = NetworkService.getInstance();
+        this.listER = networkService.getListExpenseReport();
+        this.listCompany = networkService.getListCompany();
+        this.listBug = networkService.getAllBug();
+        this.listUser = networkService.getListAllUser();
 
-        NetworkService network = NetworkService.getInstance();
-        network.getListExpenseReport();
-
-        totalERCircle.setText(""+network.getListExpenseReport().size()+"\n expense report");
-        totalArgentCircle.setText(""+getSommeERByList(network.getListExpenseReport())+"\n dollars");
-        totalCompanyCircle.setText(""+network.getListCompany().size()+"\n companies");
-        totalBugCircle.setText(""+network.getListExpenseReport().size()+"\n bugs");
+        totalERCircle.setText(""+listER.size()+"\n expense report");
+        totalArgentCircle.setText(""+getSommeERByList(listER)+"\n euros");
+        totalCompanyCircle.setText(""+listCompany+"\n companies");
+        totalBugCircle.setText(""+listBug.size()+"\n bugs");
 
 
         //On va Initialiser les graphiques
         pieChart.setLabelsVisible(false);
         pieChartEr.setLabelsVisible(false);
         pieChartUser.setLabelsVisible(false);
+
         if(getListCompanyPieChart().size()>0){
             pieChart.setData(getListCompanyPieChart());
         }
@@ -86,15 +94,6 @@ public class Statistics implements Initializable {
             emptyChart.add(new PieChart.Data("aucune valeur",20));
             pieChartUser.setData(emptyChart);
         }
-        //pieChart.setData(getListCompanyPieChart());
-
-        //pieChartEr.setData(this.getListCompaniePieChartER());
-        //pieChartUser.setData(this.getListCompaniePieChartUser());
-
-
-
-
-
     }
 
     @FXML
@@ -128,28 +127,26 @@ public class Statistics implements Initializable {
     //On fait une fonction qui permet de renvoyer une observable avec les 5 plus grosse entreprises ainsi qu'une case "Autre" en fonction de l'argent.
     public ObservableList<PieChart.Data> getListCompanyPieChart(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
-        NetworkService network = NetworkService.getInstance();
-        if(network.getListCompany().size()<5){
+        if(listCompany.size()<5){
             //Pour toutes les companies que l'on a : On prend les companies et on prend la liste des notes de frais de cette companies en calculant le total
-            for(Company company:network.getListCompany()){
+            for(Company company:listCompany){
                 System.out.println(" Le diagramme ne s'affiche pas "+company.getIdCompany());
-                if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
-                    listData.add(new PieChart.Data(company.getName()+" : "+getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany())),getSommeERByList(network.getListExpenseReportByCompany(company.getIdCompany()))));
+                if(getListErByCompany(company.getIdCompany(),listER)!=null){
+                    listData.add(new PieChart.Data(company.getName()+" : "+getSommeERByList(getListErByCompany(company.getIdCompany(),listER)),getSommeERByList(getListErByCompany(company.getIdCompany(),listER))));
                 }
             }
         }
         else {
-            List<Company> listCompany = network.getListCompany();
+
             Collections.sort(listCompany, new Comparator<Company>() {
                 @Override
                 public int compare(Company fruit2, Company fruit1)
                 {
-
-                    return  new Integer(getSommeERByList(network.getListExpenseReportByCompany(fruit1.getIdCompany()))).compareTo(new Integer(getSommeERByList(network.getListExpenseReportByCompany(fruit2.getIdCompany()))));
+                    return  new Integer(getSommeERByList(getListErByCompany(fruit1.getIdCompany(),listER))).compareTo(new Integer(getSommeERByList(getListErByCompany(fruit2.getIdCompany(),listER))));
                 }
             });
             for(int i=0;i < 5;i++){
-                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getSommeERByList(network.getListExpenseReportByCompany(listCompany.get(i).getIdCompany())),getSommeERByList(network.getListExpenseReportByCompany(listCompany.get(i).getIdCompany()))));
+                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getSommeERByList(getListErByCompany(listCompany.get(i).getIdCompany(),listER)),getSommeERByList(getListErByCompany(listCompany.get(i).getIdCompany(),listER))));
                 //System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies");
             }
 
@@ -160,26 +157,24 @@ public class Statistics implements Initializable {
     //On fait une fonction qui envoit un observable avec les compagnies en fonction du nombre de notes de frais :
     public ObservableList<PieChart.Data> getListCompaniePieChartER(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
-        NetworkService network = NetworkService.getInstance();
-        if(network.getListCompany().size()<5){
-            for(Company company:network.getListCompany()){
-                if(network.getListExpenseReportByCompany(company.getIdCompany())!=null){
-                    listData.add(new PieChart.Data(company.getName()+" : "+network.getListExpenseReportByCompany(company.getIdCompany()).size(),network.getListExpenseReportByCompany(company.getIdCompany()).size()));
+        if(listCompany.size()<5){
+            for(Company company:listCompany){
+                if(getListErByCompany(company.getIdCompany(),listER)!=null){
+                    listData.add(new PieChart.Data(company.getName()+" : "+getListErByCompany(company.getIdCompany(),listER).size(),getListErByCompany(company.getIdCompany(),listER).size()));
                 }
             }
         }
         else {
-            List<Company> listCompany = network.getListCompany();
             Collections.sort(listCompany, new Comparator<Company>() {
                 @Override
-                public int compare(Company fruit2, Company fruit1)
+                public int compare(Company company2, Company company1)
                 {
 
-                    return  new Integer(network.getListExpenseReportByCompany(fruit1.getIdCompany()).size()).compareTo(new Integer(network.getListExpenseReportByCompany(fruit2.getIdCompany()).size()));
+                    return  new Integer(getListErByCompany(company1.getIdCompany(),listER).size()).compareTo(new Integer(getListErByCompany(company2.getIdCompany(),listER).size()));
                 }
             });
             for(int i=0;i < 5;i++){
-                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+network.getListExpenseReportByCompany(listCompany.get(i).getIdCompany()).size(),network.getListExpenseReportByCompany(listCompany.get(i).getIdCompany()).size()));
+                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getListErByCompany(listCompany.get(i).getIdCompany(),listER).size(),getListErByCompany(listCompany.get(i).getIdCompany(),listER).size()));
 
                 //System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies");
             }
@@ -195,39 +190,52 @@ public class Statistics implements Initializable {
     public ObservableList<PieChart.Data> getListCompaniePieChartUser(){
         ObservableList<PieChart.Data> listData = FXCollections.observableArrayList();
         NetworkService network = NetworkService.getInstance();
-        if(network.getListCompany().size()<5){
-            for(Company company:network.getListCompany()){
-                if(network.getListUserByCompany(company.getIdCompany())!=null){
-                    listData.add(new PieChart.Data(company.getName()+" : "+network.getListUserByCompany(company.getIdCompany()).size(),network.getListUserByCompany(company.getIdCompany()).size()));
+        if(listCompany.size()<5){
+            for(Company company:listCompany){
+                if(getListUserByCompany(company.getIdCompany(),this.listUser)!=null){
+                    listData.add(new PieChart.Data(company.getName()+" : "+getListUserByCompany(company.getIdCompany(),this.listUser).size(),getListUserByCompany(company.getIdCompany(),this.listUser).size()));
                 }
             }
         }
         else {
-            List<Company> listCompany = network.getListCompany();
             Collections.sort(listCompany, new Comparator<Company>() {
                 @Override
-                public int compare(Company fruit2, Company fruit1)
+                public int compare(Company company2, Company company1)
                 {
 
-                    return  new Integer(network.getListUserByCompany(fruit1.getIdCompany()).size()).compareTo(new Integer(network.getListUserByCompany(fruit2.getIdCompany()).size()));
+                    return  new Integer(getListUserByCompany(company1.getIdCompany(),listUser).size()).compareTo(new Integer(getListUserByCompany(company2.getIdCompany(),listUser).size()));
                 }
             });
             for(int i=0;i < listCompany.size();i++){
-                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+network.getListUserByCompany(listCompany.get(i).getIdCompany()).size(),network.getListUserByCompany(listCompany.get(i).getIdCompany()).size()));
+                listData.add(new PieChart.Data(listCompany.get(i).getName()+" : "+getListUserByCompany(listCompany.get(i).getIdCompany(),listUser).size(),getListUserByCompany(listCompany.get(i).getIdCompany(),listUser).size()));
                 System.out.println("DEBUG - On entre bien dans le cas où il y a plus de 5 companies de la muerte");
             }
         }
-
-
-
-
-
-
-
-
-
-
         return listData;
+    }
+
+    // On fait une fonction qui renvoit une liste de user à partir d'un id de company :
+    public List<User> getListUserByCompany(String idCompany,List<User> listUser){
+        List listUserCompany = new ArrayList();
+        for(User user:listUser){
+            if(user.getIdCompany().equals(idCompany)){
+                listUserCompany.add(user);
+            }
+        }
+        return listUserCompany;
+    }
+
+    // On fait une fonction qui renvoit une liste de user à partir d'un id de company :
+    public List<ExpenseReport> getListErByCompany(String idCompany,List<ExpenseReport> listER){
+        List listERCompany = new ArrayList();
+        for(ExpenseReport er:listER){
+            if(er.getCompanyID().equals(idCompany)){
+                listERCompany.add(er);
+                System.out.println(er.getCompanyID());
+            }
+        }
+        System.out.println("La taille que l'on récupère est : "+listERCompany.size());
+        return listERCompany;
     }
 
 }

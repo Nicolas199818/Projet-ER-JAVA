@@ -11,13 +11,15 @@ public class User {
     private String firstname;
     private String email;
     private String createdAt;
+    private String idCompany;
 
-    public User(String idUser, String lastname, String firstname, String email, String createdAt) {
+    public User(String idUser, String lastname, String firstname, String email, String createdAt,String idCompany) {
         this.idUser = idUser;
         this.lastname = lastname;
         this.firstname = firstname;
         this.email = email;
         this.createdAt = createdAt;
+        this.idCompany = idCompany;
     }
 
     public String getIdUser() {
@@ -77,5 +79,13 @@ public class User {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(String idCompany) {
+        this.idCompany = idCompany;
     }
 }
