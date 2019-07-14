@@ -59,7 +59,7 @@ public class Statistics implements Initializable {
 
         totalERCircle.setText(""+listER.size()+"\n expense report");
         totalArgentCircle.setText(""+getSommeERByList(listER)+"\n euros");
-        totalCompanyCircle.setText(""+listCompany+"\n companies");
+        totalCompanyCircle.setText(""+listCompany.size()+"\n companies");
         totalBugCircle.setText(""+listBug.size()+"\n bugs");
 
 

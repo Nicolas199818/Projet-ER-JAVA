@@ -40,6 +40,7 @@ public class PopUpBugControler implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.text_content.setDisable(true);
     }
 
     //On catch le click sur Annuler pour fermer la pop Up

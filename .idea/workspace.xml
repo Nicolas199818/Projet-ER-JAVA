@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cb541c55-6023-4693-9f32-5779de526e42" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/EvolutionActivite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/EvolutionActivite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/data/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,16 +24,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="130">
               <caret line="88" column="12" selection-start-line="88" selection-start-column="12" selection-end-line="89" selection-end-column="21" />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/main_pages.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -63,6 +51,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#987#988#0" expanded="true" />
+                <element signature="e#1006#1007#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/statistics.fxml">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,11 +75,11 @@
           <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="245" column="352" selection-start-line="245" selection-start-column="352" selection-end-line="245" selection-end-column="352" />
+            <state relative-caret-position="116">
+              <caret line="250" column="13" selection-start-line="250" selection-start-column="13" selection-end-line="250" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -85,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="134" column="208" selection-start-line="134" selection-start-column="208" selection-end-line="134" selection-end-column="208" />
+            <state relative-caret-position="339">
+              <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -211,7 +213,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/IdentificationPage.java" />
         <option value="$PROJECT_DIR$/src/main/resources/pop_up_bug.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/data/Bug.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/ControllerAccueil.java" />
         <option value="$PROJECT_DIR$/src/main/resources/sign_up.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/identification_page.fxml" />
@@ -226,8 +227,9 @@
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/EvolutionActivite.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/data/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/data/ExpenseReport.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java" />
       </list>
     </option>
   </component>
@@ -460,12 +462,12 @@
       <workItem from="1562873015642" duration="6595000" />
       <workItem from="1562968322337" duration="618000" />
       <workItem from="1562969152902" duration="6536000" />
-      <workItem from="1563029903116" duration="18321000" />
+      <workItem from="1563029903116" duration="18835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234088000" />
+    <option name="totallyTimeSpent" value="234602000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -478,8 +480,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="814" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13161659" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24678111" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -488,7 +491,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49785408" weight="0.32963988" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4549356" visible="true" weight="0.30470914" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4549356" visible="true" weight="0.30470914" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49713877" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -505,7 +508,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info active="true" anchor="right" id="Maven" order="6" sideWeight="0.49885583" visible="true" weight="0.18168813" />
+      <window_info anchor="right" id="Maven" order="6" sideWeight="0.49885583" visible="true" weight="0.18168813" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Coverage" order="9" sideWeight="0.5011442" side_tool="true" visible="true" weight="0.024320457" />
@@ -619,16 +622,6 @@
       </provider>
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="59" column="61" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/MainPages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -700,14 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/pop_up_bug.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="128" selection-start-line="19" selection-start-column="128" selection-end-line="19" selection-end-column="128" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/main_pages.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -773,20 +758,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="250" column="13" selection-start-line="250" selection-start-column="13" selection-end-line="250" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/pop_up_bug.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="128" selection-start-line="19" selection-start-column="128" selection-end-line="19" selection-end-column="128" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/Statistics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="134" column="208" selection-start-line="134" selection-start-column="208" selection-end-line="134" selection-end-column="208" />
+        <state relative-caret-position="339">
+          <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/service/NetworkService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/openjfx/controller/PopUpBugControler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="245" column="352" selection-start-line="245" selection-start-column="352" selection-end-line="245" selection-end-column="352" />
+        <state relative-caret-position="190">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#987#988#0" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
